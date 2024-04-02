@@ -38,7 +38,7 @@
 
     @yield('styles')
     @livewireStyles
-    @vite(['resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -76,7 +76,6 @@
     <!--end::Main-->
     @include('layout.components.admin.others')
     @livewireScripts
-    <script src="{{ mix('js/app.js') }}"></script>
     <!--end::Demo Panel-->
     <script>
         var HOST_URL = "https://keenthemes.com/metronic/tools/preview";

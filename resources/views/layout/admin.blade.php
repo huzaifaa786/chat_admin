@@ -37,6 +37,8 @@
     <link rel="stylesheet" href="{{asset('admin/assets/css/toastr.css')}}" type="text/css">
 
     @yield('styles')
+    @livewireStyles
+    @vite(['resources/js/app.js'])
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -73,6 +75,7 @@
     </div>
     <!--end::Main-->
     @include('layout.components.admin.others')
+    @livewireScripts
     <!--end::Demo Panel-->
     <script>
         var HOST_URL = "https://keenthemes.com/metronic/tools/preview";
@@ -152,6 +155,9 @@
     <!--end::Page Scripts-->
     <script src="{{asset('admin/assets/js/toastr.js')}}"></script>
     @yield('scripts')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <x-livewire-alert::scripts />
 </body>
 <!--end::Body-->
 

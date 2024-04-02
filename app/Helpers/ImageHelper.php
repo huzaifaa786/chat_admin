@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Helpers;
+
+use Intervention\Image\Laravel\Facades\Image;
+
+
+class ImageHelper
+{
+    public static function saveImage($imagefile, $path)
+    {
+
+        $originalImage = $imagefile;
+        $myImage = Image::make($originalImage);
+        $originalPath = storage_path() . '/' . $path . '/';
+        $filename = rand(0, 100) . time() . '.' . $originalImage->getClientOriginalExtension();
+        $myImage->save($originalPath . $filename);
+
+        return $path . '/' . $filename;
+    }
+
+
+    public static function saveResizedImage($imagefile, $path, $width, $height)
+    {
+        $originalImage = $imagefile;
+
+        $myImage = Image::make($originalImage);
+        $myImage->resize($width, $height);
+        $originalPath = public_path() . '/' . $path . '/';
+        $filename = rand(0, 100) . time() . '.' . $originalImage->getClientOriginalExtension();
+        $myImage->save($originalPath . $filename);
+
+        return $path . '/' . $filename;
+    }
+
+    public static function saveImageFromApi($base64Image, $path)
+    {
+
+        $originalImage = base64_decode(str_replace('data:image/png;base64,', '', $base64Image));
+
+        $myImage = Image::make($originalImage);
+        // $myImage->resize(1024,768);
+        $originalPath = public_path() . '/' . $path . '/';
+        $filename = rand(0, 100) . time() . '.png';
+        $myImage->save($originalPath . $filename);
+
+        return $path . '/' . $filename;
+    }
+
+    public function deleteImage($path)
+    {
+        $image_path = public_path() . $path;
+        unlink($image_path);
+    }
+}
+

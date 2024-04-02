@@ -76,6 +76,7 @@
     <!--end::Main-->
     @include('layout.components.admin.others')
     @livewireScripts
+    <script src="{{ mix('js/app.js') }}"></script>
     <!--end::Demo Panel-->
     <script>
         var HOST_URL = "https://keenthemes.com/metronic/tools/preview";

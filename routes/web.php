@@ -12,6 +12,7 @@ Route::get('/linkstorage', function () {
     $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/storage';
     symlink($targetFolder, $linkFolder);
 });
+Route::view('login', 'admin.auth.login')->name('login');
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //// Admin Routes ///
 

@@ -15,10 +15,12 @@ class AuthController extends Controller
     public function createUser(Request $request)
     {
         try {
+
             $user = User::create($request->all());
 
-            $user->token = $user->createToken("mobile", ['role:user'])->plainTextToken;
 
+            $user->token = $user->createToken("mobile", ['role:user'])->plainTextToken;
+            
            return  Api::setResponse('user' , $user);
 
         } catch (\Throwable $th) {
@@ -26,7 +28,7 @@ class AuthController extends Controller
         }
     }
 
-    public function loginUser(UserLoginRequest $request)
+    public function loginUser(Request $request)
     {
         try {
 

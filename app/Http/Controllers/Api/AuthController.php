@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\Api;
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserLoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +14,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function createUser(Request $request)
+    public function createUser(UserCreateRequest $request)
     {
         try {
 
@@ -20,15 +22,15 @@ class AuthController extends Controller
 
 
             $user->token = $user->createToken("mobile", ['role:user'])->plainTextToken;
-            
-           return  Api::setResponse('user' , $user);
+
+            return Api::setResponse('user', $user);
 
         } catch (\Throwable $th) {
             return Api::setError($th->getMessage());
         }
     }
 
-    public function loginUser(Request $request)
+    public function loginUser(UserLoginRequest $request)
     {
         try {
 

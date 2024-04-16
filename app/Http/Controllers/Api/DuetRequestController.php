@@ -21,7 +21,7 @@ class DuetRequestController extends Controller
     public function pendingDuetRequest()
     {
         try {
-            $duetRequests = DuetRequest::where('status', 'waiting')->get();
+            $duetRequests = DuetRequest::where('status', 'waiting')->with('user')->get();
             return Api::setResponse('duetRequests', $duetRequests);
         } catch (\Throwable $th) {
             return Api::setError($th->getMessage());

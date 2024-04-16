@@ -17,3 +17,4 @@ Route::any('room/update/status', [RoomController::class, 'updateRoomStatus']);
 Route::any('rooms/multi/all', [RoomController::class, 'getMultiRooms']);
 Route::any('rooms/solo/all', [RoomController::class, 'getSoloRooms']);
 Route::any('duetrequest/create', [DuetRequestController::class, 'createDuetRequest']);
+Route::any('duetrequest/pending', [DuetRequestController::class, 'pendingDuetRequest']);

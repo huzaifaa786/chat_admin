@@ -18,4 +18,13 @@ class DuetRequestController extends Controller
             return Api::setError($th->getMessage());
         }
     }
+    public function pendingDuetRequest()
+    {
+        try {
+            $duetRequests = DuetRequest::where('status', 'waiting')->get();
+            return Api::setResponse('duetRequests', $duetRequests);
+        } catch (\Throwable $th) {
+            return Api::setError($th->getMessage());
+        }
+    }
 }

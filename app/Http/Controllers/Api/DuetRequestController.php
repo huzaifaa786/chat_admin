@@ -27,4 +27,15 @@ class DuetRequestController extends Controller
             return Api::setError($th->getMessage());
         }
     }
+
+    public function updateStatus(Request $request)
+    {
+        try {
+            $duetRequest = DuetRequest::where('room_id',$request->room_id)->first();
+            $duetRequest->update(['status'=>$request->status]);
+            return Api::setResponse('duetRequest', $duetRequest);
+        } catch (\Throwable $th) {
+            return Api::setError($th->getMessage());
+        }
+    }
 }

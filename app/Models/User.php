@@ -69,4 +69,16 @@ class User extends Authenticatable
         );
     }
 
+    public function followers()
+    {
+        return $this->hasMany(UserRelationship::class, 'followee_id');
+    }
+
+    // define relationship with UserRelationship model for followees
+
+    public function followees()
+    {
+        return $this->hasMany(UserRelationship::class, 'follower_id');
+    }
+
 }

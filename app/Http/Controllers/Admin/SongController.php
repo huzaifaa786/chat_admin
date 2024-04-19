@@ -41,6 +41,8 @@ class SongController extends Controller
             $fileUrls = $fileStorage->storeFiles($avatarImage, $musicFile, $lyricsFile);
             $song = Song::create([
                 'name' => $request->name,
+                'singer_name' => $request->singer_name,
+                'song_type' => $request->song_type,
                 'thumbnail_image_url' => $fileUrls['thumbnail_url'],
                 'music_file_url' => $fileUrls['music_url'],
                 'lyrics_file_url' => $fileUrls['lyrics_url'],

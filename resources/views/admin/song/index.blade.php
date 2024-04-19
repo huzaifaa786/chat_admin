@@ -29,7 +29,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Song Thumbnail</th>
+                                <th>Singer Name</th>
                                 <th>Song Name</th>
+                                <th>Song Type</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,7 +39,10 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td><img src="{{ $song->thumbnail_image_url }}" height="50" width="50" alt="" srcset=""></td>
+                                    <td>{{ $song->singer_name }}</td>
+
                                     <td>{{ $song->name }}</td>
+                                    <td>{{ $song->song_type }}</td>
                                     <td nowrap="nowrap"></td>
                                 </tr>
                             @endforeach

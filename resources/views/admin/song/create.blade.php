@@ -59,40 +59,46 @@
                                             placeholder="Enter song name" required />
                                         <span class="form-text text-muted">Please enter your song name</span>
                                     </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-12">
+                                        <label>Singer Name:</label>
+                                        <input type="text" class="form-control" name="singer_name"
+                                            placeholder="Enter singer name" required />
 
-
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-12">
+                                        <label>Song Type:</label>
+                                        <select name="song_type" class="form-control" id="" required>
+                                            <option value="ENGLISH">English</option>
+                                            <option value="HINDI">HINDI</option>
+                                            <option value="ARABIC">ARABIC</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-lg-9">
                                         <label>Music File:</label>
                                         <input type="file" name="music_file" accept=".mp3,.wav" required />
                                     </div>
-
-
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-lg-9">
                                         <label>Lyrics File:</label>
                                         <input type="file" name="lyrics_file" accept=".lrc" required />
-
                                     </div>
-
-
                                 </div>
-
-
                                 <!-- end: Example Code-->
                             </div>
                             <div class="card-footer">
                                 <div class="row">
-
                                     <div class="col-lg-6">
-
                                     </div>
                                     <div class="col-lg-6 text-right">
                                         <button type="submit" class="btn btn-primary mr-2">Save</button>
                                     </div>
-
                                 </div>
                             </div>
                         </form>

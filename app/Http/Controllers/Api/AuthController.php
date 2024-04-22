@@ -34,12 +34,8 @@ class AuthController extends Controller
     {
         $user = Auth::user();
         if ($user) {
-            $data = [
-                "user" => $user,
-                "followers" => $user->followers,
-                "followees" => $user->followees,
-            ];
-            return Api::setResponse("data", $data);
+           
+            return Api::setResponse("user", $user);
         } else {
             return Api::setError("User not found");
         }

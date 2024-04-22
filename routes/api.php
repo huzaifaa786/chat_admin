@@ -22,6 +22,7 @@ Route::any('duetrequest/pending', [DuetRequestController::class, 'pendingDuetReq
 Route::any('duetrequest/status/update', [DuetRequestController::class, 'updateStatus']);
 
 Route::group(['middleware' =>  ['auth:sanctum', 'user']], function () {
+    Route::any('user/details',[AuthController::class,'userDetail']);
     // Follow a user
     Route::post('follow', [UserRelationshipController::class, 'follow']);
     // Unfollow a user

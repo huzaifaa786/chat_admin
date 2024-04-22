@@ -33,8 +33,10 @@ class AuthController extends Controller
     public function userDetail()
     {
         $user = Auth::user();
+
         if ($user) {
-           
+            $user->followees;
+            $user->followers;
             return Api::setResponse("user", $user);
         } else {
             return Api::setError("User not found");

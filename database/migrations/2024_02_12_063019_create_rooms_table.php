@@ -14,14 +14,14 @@ return new class extends Migration {
             $table->id();
             $table->string('room_id')->unique();
             $table->string('room_name')->nullable();
-            $table->string('room_visibility')->nullable();
+            $table->integer('room_visibility')->default(0);
             $table->string('bulletin_message')->nullable();
             $table->string('host_id');
             $table->string('host_name')->nullable();
             $table->bigInteger('audience_count')->nullable();
-            $table->string('room_type')->nullable();
+            $table->integer('room_type')->default(0);
             $table->foreignId('song_id')->nullable();
-            $table->string('room_status')->default('live');
+            $table->integer('room_status')->default(0);
             $table->timestamps();
         });
     }

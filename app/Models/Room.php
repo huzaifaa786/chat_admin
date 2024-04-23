@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\RoomMethods;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    use HasFactory;
-
+    use HasFactory, RoomMethods;
 
     protected $fillable = [
         'room_id',

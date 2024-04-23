@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\Room\RoomStatus;
+use App\Enums\Room\RoomType;
 use App\Helpers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Room;
@@ -47,14 +49,10 @@ class RoomController extends Controller
         }
     }
 
-    public function getMultiRooms()
+    public function getChatRooms()
     {
-        $rooms = Room::where('room_type', 'multi')->where('room_status', 'live')->with('song')->get();
+        $rooms = Room::where('room_type', RoomType::CHAT->value)->where('room_status', RoomStatus::ACTIVE->value)->get();
         return Api::setResponse('rooms', $rooms);
     }
-    public function getSoloRooms()
-    {
-        $rooms = Room::where('room_type', 'solo')->where('room_status', 'live')->with('song')->get();
-        return Api::setResponse('rooms', $rooms);
-    }
+
 }

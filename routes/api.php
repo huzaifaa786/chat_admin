@@ -15,14 +15,13 @@ Route::any('songs/all', [SongController::class, 'index']);
 Route::any('room/create', [RoomController::class, 'createRoom']);
 Route::any('room/update/count', [RoomController::class, 'updateRoomCount']);
 Route::any('room/update/status', [RoomController::class, 'updateRoomStatus']);
-Route::any('rooms/multi/all', [RoomController::class, 'getMultiRooms']);
-Route::any('rooms/solo/all', [RoomController::class, 'getSoloRooms']);
+// Duet Request
 Route::any('duetrequest/create', [DuetRequestController::class, 'createDuetRequest']);
 Route::any('duetrequest/pending', [DuetRequestController::class, 'pendingDuetRequest']);
 Route::any('duetrequest/status/update', [DuetRequestController::class, 'updateStatus']);
 
-Route::group(['middleware' =>  ['auth:sanctum', 'user']], function () {
-    Route::get('user/details',[AuthController::class,'userDetail']);
+Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
+    Route::get('user/details', [AuthController::class, 'userDetail']);
     // Follow a user
     Route::post('follow', [UserRelationshipController::class, 'follow']);
     // Unfollow a user
@@ -31,6 +30,10 @@ Route::group(['middleware' =>  ['auth:sanctum', 'user']], function () {
     Route::post('is-following', [UserRelationshipController::class, 'isFollowing']);
 });
 
-// Public routes
+
 Route::get('followers/{userId}', [UserRelationshipController::class, 'followers']);
 Route::get('followees/{userId}', [UserRelationshipController::class, 'followees']);
+
+// CHAT ROOMS
+Route::any('rooms/chat/all', [RoomController::class, 'getChatRooms']);
+

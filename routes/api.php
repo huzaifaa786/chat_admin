@@ -35,5 +35,5 @@ Route::get('followers/{userId}', [UserRelationshipController::class, 'followers'
 Route::get('followees/{userId}', [UserRelationshipController::class, 'followees']);
 
 // CHAT ROOMS
-Route::any('rooms/chat/all', [RoomController::class, 'getChatRooms']);
+Route::get('rooms/chat/all', [RoomController::class, 'getChatRooms']);
 

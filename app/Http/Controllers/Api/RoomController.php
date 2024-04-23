@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\Room\RoomStatus;
 use App\Enums\Room\RoomType;
+use App\Enums\Room\RoomVisibility;
 use App\Helpers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Room;
@@ -52,7 +53,7 @@ class RoomController extends Controller
 
     public function getChatRooms()
     {
-        $rooms = Room::where('room_type', RoomType::CHAT->value)->where('room_status', RoomStatus::ACTIVE->value)->get();
+        $rooms = Room::where('room_type', RoomType::CHAT->value)->where('room_visibility',RoomVisibility::PUBLIC->value)->where('room_status', RoomStatus::ACTIVE->value)->get();
         return Api::setResponse('rooms', $rooms);
     }
 

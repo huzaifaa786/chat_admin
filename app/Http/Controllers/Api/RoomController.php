@@ -14,7 +14,8 @@ class RoomController extends Controller
     public function createRoom(Request $request)
     {
         try {
-            $room = Room::create($request->all());
+            $dbroom = Room::create($request->all());
+            $room = Room::find($dbroom->id);
             return Api::setResponse('room', $room);
         } catch (\Throwable $th) {
             return Api::setError($th->getMessage());

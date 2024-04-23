@@ -21,7 +21,7 @@ trait RoomMethods
 
     public function getRoomVisibilityAttribute($value)
     {
-        return RoomVisibility::from($value)->name;
+        return $value->name;
     }
 
     public function setRoomTypeAttribute($value)
@@ -37,7 +37,7 @@ trait RoomMethods
 
     public function getRoomTypeAttribute($value)
     {
-        return RoomType::from($value)->name;
+        return $value->name;
     }
 
     public function setRoomStatusAttribute($value)
@@ -52,7 +52,7 @@ trait RoomMethods
 
     public function getRoomStatusAttribute($value)
     {
-        return RoomStatus::from($value)->name;
+        return $value->name;
     }
 
 }

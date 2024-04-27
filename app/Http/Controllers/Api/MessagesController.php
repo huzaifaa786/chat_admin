@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
@@ -241,11 +242,7 @@ class MessagesController extends Controller
 
         }
 
-        return response()->json([
-            'contacts' => $users->items(),
-            'total' => $users->total() ?? 0,
-            'last_page' => $users->lastPage() ?? 1,
-        ], 200);
+        return Api::setResponse('contacts', $users->items(),);
     }
 
     /**

@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     /**
      * Authentication for pusher private channels
      */
-    Route::post('/chat/auth', 'MessagesController@pusherAuth')->name('api.pusher.auth');
+    Route::post('/chat/auth', 'MessagesController@pusherAuth');
 
     /**
      *  Fetch info for specific id [user/group]

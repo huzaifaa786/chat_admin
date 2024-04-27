@@ -223,6 +223,15 @@ class MessagesController extends Controller
             ->paginate($request->per_page ?? $this->perPage);
         foreach ($users->items() as $user) {
             $user->avatar = asset($user->image);
+            $lastMessage = Message::where(function ($query) use ($user) {
+                $query->where('from_id', Auth::user()->id)
+                    ->where('to_id', $user->id);
+            })->orWhere(function ($query) use ($user) {
+                $query->where('from_id', $user->id)
+                    ->where('to_id', Auth::user()->id);
+            })->latest()->first();
+
+            $user->last_message = $lastMessage ? $lastMessage->body : null;
         }
 
         return response()->json([

@@ -232,6 +232,13 @@ class MessagesController extends Controller
             })->latest()->first();
 
             $user->last_message = $lastMessage ? $lastMessage->body : null;
+            $unseenMessagesCount = Message::where('to_id', Auth::user()->id)
+                ->where('from_id', $user->id)
+                ->where('seen', false)
+                ->count();
+
+            $user->unseen_messages_count = $unseenMessagesCount;
+
         }
 
         return response()->json([

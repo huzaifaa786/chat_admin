@@ -221,6 +221,9 @@ class MessagesController extends Controller
             ->orderBy('max_created_at', 'desc')
             ->groupBy('users.id')
             ->paginate($request->per_page ?? $this->perPage);
+        foreach ($users->items() as $user) {
+            $user->avatar = $user->image;
+        }
 
         return response()->json([
             'contacts' => $users->items(),

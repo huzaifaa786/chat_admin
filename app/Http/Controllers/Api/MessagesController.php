@@ -222,7 +222,7 @@ class MessagesController extends Controller
             ->groupBy('users.id')
             ->paginate($request->per_page ?? $this->perPage);
         foreach ($users->items() as $user) {
-            $user->avatar = $user->image;
+            $user->avatar = asset($user->image);
         }
 
         return response()->json([

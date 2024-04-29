@@ -179,7 +179,7 @@ class MessagesController extends Controller
             'total' => $totalMessages,
             'last_page' => $lastPage,
             'last_message_id' => collect($messages->items())->last()->id ?? null,
-            'messages' => $messages->reverse()->items(),
+            'messages' => $messages->reverse()->toArray(),
         ];
         return Response::json($response);
     }

@@ -27,4 +27,9 @@ class Room extends Model
     {
         return $this->belongsTo(Song::class, 'song_id', 'id');
     }
+
+    public function requests()
+    {
+        return $this->hasMany(SongQueueRequest::class, 'room_id', 'room_id');
+    }
 }

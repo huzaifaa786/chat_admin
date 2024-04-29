@@ -171,7 +171,7 @@ class MessagesController extends Controller
      */
     public function fetch(Request $request)
     {
-        $query = Chatify::fetchMessagesQuery($request['id'])->latest();
+        $query = Chatify::fetchMessagesQuery($request['id'])->latest()->orderBy('created_at', 'desc');
         $messages = $query->paginate($request->per_page ?? $this->perPage);
         $totalMessages = $messages->total();
         $lastPage = $messages->lastPage();
@@ -179,7 +179,7 @@ class MessagesController extends Controller
             'total' => $totalMessages,
             'last_page' => $lastPage,
             'last_message_id' => collect($messages->items())->last()->id ?? null,
-            'messages' => $messages->reverse()->toArray(),
+            'messages' => $messages->items(),
         ];
         return Response::json($response);
     }
@@ -242,7 +242,7 @@ class MessagesController extends Controller
 
         }
 
-        return Api::setResponse('contacts', $users->items(),);
+        return Api::setResponse('contacts', $users->items(), );
     }
 
     /**

@@ -19,6 +19,12 @@ class FileHelper
         ];
     }
 
+    public function storeSingleFile($recordingFile, $filePath)
+    {
+        $recordingFilePath = $this->storeFile($recordingFile, $filePath);
+        return $this->getFileUrl($recordingFilePath);
+    }
+
     private function storeFile($file, $storagePath)
     {
         $filenameWithExt = $file->getClientOriginalName();

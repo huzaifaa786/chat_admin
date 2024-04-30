@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\SongController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DuetRequestController;
+use App\Http\Controllers\Api\RecordingController;
 use App\Http\Controllers\Api\SongQueueRequestController;
 use App\Http\Controllers\Api\UserRelationshipController;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::post('unfollow', [UserRelationshipController::class, 'unfollow']);
     // Check if the logged-in user is following a specific user
     Route::post('is-following', [UserRelationshipController::class, 'isFollowing']);
+
+    Route::any('recording/get', [RecordingController::class, 'index']);
 });
 
 
@@ -38,6 +41,10 @@ Route::get('followees/{userId}', [UserRelationshipController::class, 'followees'
 
 // CHAT ROOMS
 Route::get('rooms/chat/all', [RoomController::class, 'getChatRooms']);
+
+// RECORDING
+Route::any('recording/store', [RecordingController::class, 'store']);
+
 
 // CHAT APIS //
 

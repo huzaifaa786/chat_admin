@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     // Check if the logged-in user is following a specific user
     Route::post('is-following', [UserRelationshipController::class, 'isFollowing']);
 
-    Route::any('recording/get', [RecordingController::class, 'index']);
+    Route::get('recording/get', [RecordingController::class, 'index']);
 });
 
 

@@ -42,6 +42,7 @@ Route::get('followees/{userId}', [UserRelationshipController::class, 'followees'
 
 // CHAT ROOMS
 Route::get('rooms/chat/all', [RoomController::class, 'getChatRooms']);
+Route::get('rooms/queue/all', [RoomController::class, 'getQueueRooms']);
 
 // RECORDING
 Route::any('recording/store', [RecordingController::class, 'store']);

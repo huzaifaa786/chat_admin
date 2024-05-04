@@ -53,7 +53,12 @@ class RoomController extends Controller
 
     public function getChatRooms()
     {
-        $rooms = Room::where('room_visibility', RoomVisibility::PUBLIC ->value)->where('room_status', RoomStatus::ACTIVE->value)->with('requests')->get();
+        $rooms = Room::where('room_type', RoomType::CHAT->value)->where('room_visibility', RoomVisibility::PUBLIC ->value)->where('room_status', RoomStatus::ACTIVE->value)->get();
+        return Api::setResponse('rooms', $rooms);
+    }
+    public function getQueueRooms()
+    {
+        $rooms = Room::where('room_type', RoomType::STAGE->value)->where('room_visibility', RoomVisibility::PUBLIC ->value)->where('room_status', RoomStatus::ACTIVE->value)->with('requests')->get();
         return Api::setResponse('rooms', $rooms);
     }
 

@@ -62,4 +62,13 @@ class AuthController extends Controller
             return Api::setError($th->getMessage());
         }
     }
+
+    public function isOnline(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $user->update([
+            'is_online' => $request->isOnline
+        ]);
+        return Api::setResponse('user', $user);
+    }
 }

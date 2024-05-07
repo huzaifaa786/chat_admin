@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthController::class, 'createUser']);
 Route::post('login', [AuthController::class, 'loginUser']);
+
 Route::any('songs/all', [SongController::class, 'index']);
 Route::any('room/create', [RoomController::class, 'createRoom']);
 Route::any('room/update/count', [RoomController::class, 'updateRoomCount']);
@@ -34,6 +35,8 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::post('is-following', [UserRelationshipController::class, 'isFollowing']);
 
     Route::get('recording/get', [RecordingController::class, 'index']);
+
+    Route::any('user/online',[AuthController::class,'isOnline']);
 });
 
 

@@ -66,14 +66,15 @@ class AuthController extends Controller
     public function isOnline(Request $request)
     {
         $user = User::find(Auth::user()->id);
-        if($request->is_online)
-        $user->update([
-            'is_online' => true,
-        ]);
-        else
-        $user->update([
-            'is_online' => false,
-        ]);
+        if ($request->is_online) {
+            $user->update([
+                'is_online' => true,
+            ]);
+        } else {
+            $user->update([
+                'is_online' => false,
+            ]);
+        }
         return Api::setResponse('user', $user);
     }
 }

@@ -47,7 +47,9 @@ class UserRelationshipController extends Controller
             ]);
         }
 
-        return Api::setMessage("Successfully followed user.", );
+        $user = User::find($request->followee_id);
+
+        return Api::setResponse("user", $user);
     }
 
     // Unfollow a user
@@ -62,10 +64,12 @@ class UserRelationshipController extends Controller
 
         if ($relationship) {
             $relationship->delete();
-            return Api::setMessage("Successfully unfollowed user.");
+            $user = User::find($request->followee_id);
+
+            return Api::setResponse("user", $user);
         }
 
-        return Api::setMessage("You are not following this user.");
+        return Api::setError("You are not following this user.");
     }
 
     // Check if the logged-in user is following a specific user

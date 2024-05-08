@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthController::class, 'createUser']);
 Route::post('login', [AuthController::class, 'loginUser']);
-Route::any('user/search', [AuthController::class, 'searchUser']);
 
 Route::any('songs/all', [SongController::class, 'index']);
 Route::any('room/create', [RoomController::class, 'createRoom']);
@@ -27,6 +26,8 @@ Route::any('queuerequest/create', [SongQueueRequestController::class, 'store']);
 Route::any('queuerequest/delete', [SongQueueRequestController::class, 'deleteRequest']);
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
+    Route::any('user/search', [AuthController::class, 'searchUser']);
+
     Route::get('user/details', [AuthController::class, 'userDetail']);
     // Follow a user
     Route::post('follow', [UserRelationshipController::class, 'follow']);
@@ -37,12 +38,14 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
 
     Route::get('recording/get', [RecordingController::class, 'index']);
 
-    Route::any('user/online',[AuthController::class,'isOnline']);
+    Route::any('user/online', [AuthController::class, 'isOnline']);
+    
+    Route::get('followers/{userId}', [UserRelationshipController::class, 'followers']);
+    Route::get('followees/{userId}', [UserRelationshipController::class, 'followees']);
 });
 
 
-Route::get('followers/{userId}', [UserRelationshipController::class, 'followers']);
-Route::get('followees/{userId}', [UserRelationshipController::class, 'followees']);
+
 
 // CHAT ROOMS
 Route::get('rooms/chat/all', [RoomController::class, 'getChatRooms']);

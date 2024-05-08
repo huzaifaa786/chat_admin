@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -55,6 +56,15 @@ class User extends Authenticatable
         }
     }
 
+    public function getIsFollowingAttribute(): bool
+    {
+        // Check if the authenticated user is following this user
+        if (Auth::check()) {
+            return $this->followers()->where('follower_id', Auth::id())->exists();
+        }
+
+        return false;
+    }
         /**
      * Method setImageAttribute
      *

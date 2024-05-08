@@ -49,6 +49,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $appends = ['is_following'];
+
     public function setPasswordAttribute($value)
     {
         if (!empty($value)) {
@@ -65,7 +67,7 @@ class User extends Authenticatable
 
         return false;
     }
-        /**
+    /**
      * Method setImageAttribute
      *
      * @param $value $value [explicite description]
@@ -75,8 +77,8 @@ class User extends Authenticatable
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => asset($value),
-            set: fn (string $value) => ImageHelper::saveImageFromApi($value, 'images/user')
+            get: fn(string $value) => asset($value),
+            set: fn(string $value) => ImageHelper::saveImageFromApi($value, 'images/user')
         );
     }
 

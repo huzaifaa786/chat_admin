@@ -43,6 +43,16 @@ class AuthController extends Controller
         }
     }
 
+    public function getUser(Request $request)
+    {
+        $user = User::find($request->id);
+        if ($user) {
+            return Api::setResponse('user', $user);
+        } else {
+            return Api::setError('User not found');
+        }
+    }
+
     public function loginUser(UserLoginRequest $request)
     {
         try {
@@ -81,6 +91,6 @@ class AuthController extends Controller
     public function searchUser(Request $request)
     {
         $users = User::where('name', 'LIKE', "%{$request->keyword}%")->get();
-        return Api::setResponse('users',$users);
+        return Api::setResponse('users', $users);
     }
 }

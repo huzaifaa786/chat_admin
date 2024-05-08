@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::any('user/search', [AuthController::class, 'searchUser']);
 
     Route::get('user/details', [AuthController::class, 'userDetail']);
+    Route::any('user/get', [AuthController::class, 'getUser']);
     // Follow a user
     Route::post('follow', [UserRelationshipController::class, 'follow']);
     // Unfollow a user
@@ -39,7 +40,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::get('recording/get', [RecordingController::class, 'index']);
 
     Route::any('user/online', [AuthController::class, 'isOnline']);
-    
+
     Route::get('followers/{userId}', [UserRelationshipController::class, 'followers']);
     Route::get('followees/{userId}', [UserRelationshipController::class, 'followees']);
 });

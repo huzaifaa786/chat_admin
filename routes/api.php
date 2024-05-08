@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthController::class, 'createUser']);
 Route::post('login', [AuthController::class, 'loginUser']);
+Route::any('user/search', [AuthController::class, 'searchUser']);
 
 Route::any('songs/all', [SongController::class, 'index']);
 Route::any('room/create', [RoomController::class, 'createRoom']);

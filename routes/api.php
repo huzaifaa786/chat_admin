@@ -18,6 +18,7 @@ Route::any('songs/all', [SongController::class, 'index']);
 Route::any('room/create', [RoomController::class, 'createRoom']);
 Route::any('room/update/count', [RoomController::class, 'updateRoomCount']);
 Route::any('room/update/status', [RoomController::class, 'updateRoomStatus']);
+Route::any('room/update/type', [RoomController::class, 'updateRoomType']);
 // Duet Request
 Route::any('duetrequest/create', [DuetRequestController::class, 'createDuetRequest']);
 Route::any('duetrequest/pending', [DuetRequestController::class, 'pendingDuetRequest']);

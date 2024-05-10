@@ -51,6 +51,20 @@ class RoomController extends Controller
         }
     }
 
+    public function updateRoomType(Request $request)
+    {
+
+        $room = Room::where('room_id', $request->room_id)->first();
+        if ($room != null) {
+            $room->update([
+                'room_type' => $request->room_type
+            ]);
+            return Api::setMessage('Room updated successfully');
+        } else {
+            return Api::setError('Room not found');
+        }
+    }
+
     public function getChatRooms()
     {
         $rooms = Room::where('room_type', RoomType::CHAT->value)->where('room_visibility', RoomVisibility::PUBLIC ->value)->where('room_status', RoomStatus::ACTIVE->value)->get();

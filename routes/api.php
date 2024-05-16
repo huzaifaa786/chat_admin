@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\SongController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DuetRequestController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\RecordingController;
 use App\Http\Controllers\Api\SongQueueRequestController;
 use App\Http\Controllers\Api\UserRelationshipController;
@@ -28,6 +29,7 @@ Route::any('queuerequest/delete', [SongQueueRequestController::class, 'deleteReq
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::any('user/search', [AuthController::class, 'searchUser']);
     Route::get('user/details', [AuthController::class, 'userDetail']);
+    Route::get('notification/all', [NotificationController::class, 'getNotification']);
     Route::any('user/get', [AuthController::class, 'getUser']);
     // Follow a user
     Route::post('follow', [UserRelationshipController::class, 'follow']);

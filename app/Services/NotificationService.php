@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-// use App\Models\Notification;
 
 use App\Models\Notification;
 use Illuminate\Support\Facades\Http;
@@ -14,7 +13,7 @@ class NotificationService
 
     public function __construct()
     {
-        $this->serverKey = env('FIREBASE_SERVER_KEY');
+        $this->serverKey = "AAAAcoO4N50:APA91bG6LH0fFNNmUGhW1BkjKJuoOrERBbwFwdQH5WdqedMH2lCqAmlztJ7zgOYB82zZMg3oJUGIKLhj7st2Do1BqUuRoew7kthCNUww1YY2INAbAysJKE14sr1WazxGv4UfGbRMV3ni";
     }
 
     function sendNotification($senderId, $receiverId, $deviceToken, $roomId = null, $title, $body, $type)

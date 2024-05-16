@@ -6,6 +6,7 @@ use App\Models\ChMessage;
 use App\Models\User;
 use App\Services\NotificationService;
 use Illuminate\Notifications\Events\NotificationSent;
+use Illuminate\Support\Facades\Log;
 use Notification;
 
 class ChMessageObserver
@@ -15,6 +16,7 @@ class ChMessageObserver
      */
     public function created(ChMessage $chMessage): void
     {
+        Log::info("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" . $chMessage->from_id);
         $sender = User::find($chMessage->from_id);
         $receiver = User::find($chMessage->to_id);
         (new NotificationService)->sendNotification($sender->id, $receiver->id, $receiver->fcm_token, null, "New message received", "you have received a new message from " . $receiver->name, "MESSAGE");

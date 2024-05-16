@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Models\Notification;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class NotificationService
 {
@@ -16,7 +17,7 @@ class NotificationService
         $this->serverKey = env('FIREBASE_SERVER_KEY');
     }
 
-    function sendNotification($senderId, $receiverId, $deviceToken, $roomId = null,  $title, $body, $type)
+    function sendNotification($senderId, $receiverId, $deviceToken, $roomId = null, $title, $body, $type)
     {
         $notificationData = [
             'recipient_id' => $receiverId,
@@ -28,7 +29,7 @@ class NotificationService
         ];
 
         Notification::create($notificationData);
-
+        Log::info("BBBBBBBBBBBBBBBBBBBBBBBbb" . $this->serverKey);
         $response = Http::withHeaders([
             'Authorization' => 'key=' . $this->serverKey,
             'Content-Type' => 'application/json',
@@ -39,7 +40,7 @@ class NotificationService
                     ],
                     'to' => $deviceToken,
                 ]);
-
+        Log::info("CCCCCCCCCCCCCCCCCCCCCCCCCCCCc" . $response);
         return $response->json();
     }
 }

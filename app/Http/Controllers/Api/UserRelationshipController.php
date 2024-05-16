@@ -47,7 +47,7 @@ class UserRelationshipController extends Controller
                 'followee_id' => $request->followee_id,
             ]);
 
-            (new NotificationService)->sendNotification($relationship->follower->id, $relationship->followee->id, $relationship->followee->fcm_token, null, "New follower", $relationship->follower->name . " started following you", "INVITE");
+            (new NotificationService)->sendNotification($relationship->follower->id, $relationship->followee->id, $relationship->followee->fcm_token, null, "New follower", $relationship->follower->name . " started following you", "FOLLOW");
         }
 
         $user = User::find($request->followee_id);

@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
-    public function getNotification(){
+    public function getNotification()
+    {
         $user = Auth::user();
-        $notifications  = Notification::where('recipient_id',$user->id)->where('notification_type','!=',NotificationType::MESSAGE->value)->get();
-        return Api::setResponse('notifications',$notifications);
+        $notifications = Notification::where('recipient_id', $user->id)->where('notification_type', '!=', NotificationType::MESSAGE->value)->with('sender')->with('receiver')->get();
+        return Api::setResponse('notifications', $notifications);
     }
 }

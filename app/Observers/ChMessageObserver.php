@@ -16,7 +16,6 @@ class ChMessageObserver
      */
     public function created(ChMessage $chMessage): void
     {
-        Log::info("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" . $chMessage->from_id);
         $sender = User::find($chMessage->from_id);
         $receiver = User::find($chMessage->to_id);
         (new NotificationService)->sendNotification($sender->id, $receiver->id, $receiver->fcm_token, null, "New message received", "you have received a new message from " . $receiver->name, "MESSAGE");

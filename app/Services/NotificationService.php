@@ -28,7 +28,7 @@ class NotificationService
         ];
 
         Notification::create($notificationData);
-        Log::info("BBBBBBBBBBBBBBBBBBBBBBBbb" . $this->serverKey);
+
         $response = Http::withHeaders([
             'Authorization' => 'key=' . $this->serverKey,
             'Content-Type' => 'application/json',
@@ -39,7 +39,7 @@ class NotificationService
                     ],
                     'to' => $deviceToken,
                 ]);
-        Log::info("CCCCCCCCCCCCCCCCCCCCCCCCCCCCc" . $response);
+      
         return $response->json();
     }
 }

@@ -20,7 +20,10 @@ class AuthController extends Controller
 
             $user = User::create($request->all());
 
-
+            if ($request->has('fcm_token')) {
+                $user->fcm_token = $request->fcm_token;
+                $user->save();
+            }
             $user->token = $user->createToken("mobile", ['role:user'])->plainTextToken;
 
             return Api::setResponse('user', $user);
@@ -63,6 +66,11 @@ class AuthController extends Controller
                 throw ValidationException::withMessages([
                     'email' => ['Invalid credentials'],
                 ]);
+            }
+
+            if ($request->has('fcm_token')) {
+                $user->fcm_token = $request->fcm_token;
+                $user->save();
             }
 
             $user->token = $user->createToken("mobile", ['role:user'])->plainTextToken;

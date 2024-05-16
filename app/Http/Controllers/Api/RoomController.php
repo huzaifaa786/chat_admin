@@ -25,7 +25,6 @@ class RoomController extends Controller
 
     public function updateRoomCount(Request $request)
     {
-
         $room = Room::where('room_id', $request->room_id)->first();
         if ($room != null) {
             $room->update([
@@ -35,11 +34,9 @@ class RoomController extends Controller
         } else {
             return Api::setError('Room not found');
         }
-
     }
     public function updateRoomStatus(Request $request)
     {
-
         $room = Room::where('room_id', $request->room_id)->first();
         if ($room != null) {
             $room->update([
@@ -53,7 +50,6 @@ class RoomController extends Controller
 
     public function updateRoomType(Request $request)
     {
-
         $room = Room::where('room_id', $request->room_id)->first();
         if ($room != null) {
             $room->update([

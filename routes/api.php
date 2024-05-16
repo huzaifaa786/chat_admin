@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthController::class, 'createUser']);
 Route::post('login', [AuthController::class, 'loginUser']);
-
 Route::any('songs/all', [SongController::class, 'index']);
 Route::any('room/create', [RoomController::class, 'createRoom']);
 Route::any('room/update/count', [RoomController::class, 'updateRoomCount']);
@@ -28,7 +27,6 @@ Route::any('queuerequest/delete', [SongQueueRequestController::class, 'deleteReq
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::any('user/search', [AuthController::class, 'searchUser']);
-
     Route::get('user/details', [AuthController::class, 'userDetail']);
     Route::any('user/get', [AuthController::class, 'getUser']);
     // Follow a user
@@ -37,28 +35,18 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::post('unfollow', [UserRelationshipController::class, 'unfollow']);
     // Check if the logged-in user is following a specific user
     Route::post('is-following', [UserRelationshipController::class, 'isFollowing']);
-
     Route::get('recording/get', [RecordingController::class, 'index']);
-
     Route::any('user/online', [AuthController::class, 'isOnline']);
-
     Route::get('followers/{userId}', [UserRelationshipController::class, 'followers']);
     Route::get('followees/{userId}', [UserRelationshipController::class, 'followees']);
 });
 
-
-
-
 // CHAT ROOMS
 Route::get('rooms/chat/all', [RoomController::class, 'getChatRooms']);
 Route::get('rooms/queue/all', [RoomController::class, 'getQueueRooms']);
-
 // RECORDING
 Route::any('recording/store', [RecordingController::class, 'store']);
-
-
 // CHAT APIS //
-
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         /**

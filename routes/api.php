@@ -27,6 +27,7 @@ Route::any('queuerequest/create', [SongQueueRequestController::class, 'store']);
 Route::any('queuerequest/delete', [SongQueueRequestController::class, 'deleteRequest']);
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
+    Route::post('updatePassword', [AuthController::class, 'updatePassword']);
     Route::any('user/search', [AuthController::class, 'searchUser']);
     Route::get('user/details', [AuthController::class, 'userDetail']);
     Route::get('notification/all', [NotificationController::class, 'getNotification']);

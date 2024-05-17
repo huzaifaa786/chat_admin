@@ -101,4 +101,25 @@ class AuthController extends Controller
         $users = User::where('name', 'LIKE', "%{$request->keyword}%")->get();
         return Api::setResponse('users', $users);
     }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'string', 'min:6'],
+            'new_password' => ['required', 'string', 'min:6',]
+        ]);
+
+        $currentPasswordStatus = Hash::check($request->password, auth()->user()->password);
+        if ($currentPasswordStatus) {
+            $user = User::find(auth()->user()->id);
+            if (!$user) {
+                return Api::setResponse('error', 'user not found');
+            } else {
+                $user->update(['password' => $request->new_password]);
+                return Api::setResponse('success', 'Password updated');
+            }
+        } else {
+            return Api::setError('Wrong current password');
+        }
+    }
 }

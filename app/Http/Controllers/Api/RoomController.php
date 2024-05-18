@@ -72,4 +72,10 @@ class RoomController extends Controller
         return Api::setResponse('rooms', $rooms);
     }
 
+    public function getRoomDetail($id){
+        $room = Room::find($id)->with('requests');
+        return Api::setResponse('room',$room);
+
+    }
+
 }

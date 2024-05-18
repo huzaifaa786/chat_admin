@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Chatify\CustomChatify as Chatify;
 use App\Helpers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\ChMessage as Message;
 use App\Models\ChFavorite as Favorite;
-use Chatify\Facades\ChatifyMessenger as Chatify;
+// use  as Chatify;
 use App\Models\User;
+// use Chatify\Facades\ChatifyMessenger as Chatify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +20,8 @@ use Illuminate\Support\Str;
 
 class MessagesController extends Controller
 {
-    protected $perPage = 30;
+
+    protected $perPage = 111111111130;
 
     /**
      * Authinticate the connection for pusher
@@ -131,7 +134,8 @@ class MessagesController extends Controller
         if (!$error->status) {
             // send to database
             $message = Chatify::newMessage([
-                'type' => $request['type'],
+                'room_id'=>isset($request['room_id']) ?$request['room_id']:null,
+                'type' => isset($request['type']) ? $request['type']: null,
                 'from_id' => Auth::user()->id,
                 'to_id' => $request['id'],
                 'body' => htmlentities(trim($request['message']), ENT_QUOTES, 'UTF-8'),

@@ -11,4 +11,12 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 class ChMessage extends Model
 {
     use UUID;
+
+    protected $with = ['room'];
+    public function room()
+    {
+        return $this->belongsTo(Room::class, 'room_id', 'room_id');
+    }
 }
+
+

@@ -78,6 +78,7 @@ class CustomChatify extends ChatifyMessenger
             'message' => $msg->body,
             'type' => $msg->type,
             'room_id' => $msg->room_id,
+            'room'=>$msg->room,
             'attachment' => (object) [
                 'file' => $attachment,
                 'title' => $attachment_title,

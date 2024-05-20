@@ -42,7 +42,7 @@ class UserRelationshipController extends Controller
 
         if (!$existingRelationship) {
             // Create the relationship
-            $relationship = UserRelationship::create([
+            $relationship = UserRelationship::create([ 
                 'follower_id' => $followerId,
                 'followee_id' => $request->followee_id,
             ]);

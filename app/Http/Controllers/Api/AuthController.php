@@ -98,7 +98,13 @@ class AuthController extends Controller
 
     public function searchUser(Request $request)
     {
+
         $users = User::where('name', 'LIKE', "%{$request->keyword}%")->get();
+        return Api::setResponse('users', $users);
+    }
+    public function allUser()
+    {
+        $users = User::where('id','!=',Auth::user()->id)->get();
         return Api::setResponse('users', $users);
     }
 

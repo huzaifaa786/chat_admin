@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::get('user/details', [AuthController::class, 'userDetail']);
     Route::get('notification/all', [NotificationController::class, 'getNotification']);
     Route::any('user/get', [AuthController::class, 'getUser']);
+    Route::get('user/all', [AuthController::class, 'allUser']);
     // Follow a user
     Route::post('follow', [UserRelationshipController::class, 'follow']);
     // Unfollow a user

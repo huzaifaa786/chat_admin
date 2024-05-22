@@ -26,6 +26,11 @@ Route::any('duetrequest/status/update', [DuetRequestController::class, 'updateSt
 Route::any('queuerequest/create', [SongQueueRequestController::class, 'store']);
 Route::any('queuerequest/delete', [SongQueueRequestController::class, 'deleteRequest']);
 
+Route::any('forgetpassword', [AuthController::class, 'forgetPassword']);
+Route::any('verifyemail', [AuthController::class, 'verifyEmail']);
+Route::any('verifyOtp', [AuthController::class, 'verifyOtp']);
+Route::any('forgetUpdatePassword', [AuthController::class, 'forgetupdatePassword']);
+
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::post('updatePassword', [AuthController::class, 'updatePassword']);
     Route::any('user/search', [AuthController::class, 'searchUser']);

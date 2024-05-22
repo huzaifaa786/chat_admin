@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use App\Helpers\Api;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserLoginRequest;
+use App\Mail\UserForgetPassword;
+use App\Models\ForgetPassword;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -127,5 +130,68 @@ class AuthController extends Controller
         } else {
             return Api::setError('Wrong current password');
         }
+    }
+
+
+    public function forgetPassword(Request $request)
+    {
+        try {
+            $existingOtp = ForgetPassword::where('email', $request->email)->first();
+            if ($existingOtp) {
+                $existingOtp->delete();
+            }
+            $user = User::where('email', $request->email)->first();
+
+            if ($user) {
+                $otp = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+                $mailData = [
+                    'title' => 'MM-Telecom Forget Password',
+                    'name' => $user->name,
+                    'otp' => $otp,
+                ];
+                ForgetPassword::create([
+                    'email' => $request->email,
+                    'otp' => $otp
+                ]);
+                Mail::to($request->email)->send(new UserForgetPassword($mailData));
+
+                return Api::setResponse('mail', 'OTP sent successfully');
+            } else {
+                return Api::setError('Account does not exist');
+            }
+        } catch (\Exception $e) {
+            return Api::setError('An error occurred: ' . $e->getMessage());
+        }
+    }
+    public function verifyOtp(Request $request)
+    {
+        $otp = ForgetPassword::where('otp', $request->otp)->first();
+        if ($otp) {
+            $otp->delete();
+            return Api::setResponse('otp', 'matched');
+        } else {
+            return Api::setError('Invalid OTP');
+        }
+    }
+    public function verifyEmail(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $user->token = $user->createToken('auth_token')->plainTextToken;
+            return Api::setResponse('user', $user);
+        } else {
+            return Api::setResponse('user' , null);
+        }
+    }
+    public function forgetupdatePassword(Request $request)
+    {
+
+        $data = User::where('email', $request->email)->first();
+
+        $data->update([
+            'password' => $request->password
+        ]);
+
+        return Api::setResponse('update', $data);
     }
 }

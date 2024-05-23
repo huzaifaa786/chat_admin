@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::get('followees/{userId}', [UserRelationshipController::class, 'followees']);
     Route::get('rooms/chat/all', [RoomController::class, 'getChatRooms']);
     Route::get('rooms/queue/all', [RoomController::class, 'getQueueRooms']);
+    Route::get('rooms/detail/{id}', [RoomController::class, 'getRoomDetail']);
 });
 
 // CHAT ROOMS

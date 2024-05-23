@@ -81,7 +81,7 @@ class RoomController extends Controller
     {
         $rooms = Room::where('room_type', RoomType::STAGE->value)->where('room_visibility', RoomVisibility::PUBLIC ->value)->where('room_status', RoomStatus::ACTIVE->value)->with('requests')->get();
         $privateRooms = Room::where('room_visibility', RoomVisibility::PRIVATE ->value)->where('room_type', RoomType::STAGE->value)->where('host_id', Auth::id())->where('room_status', RoomStatus::ACTIVE->value)->get();
-        
+
         // Merge the two collections
         $mergedRooms = $rooms->merge($privateRooms);
         return Api::setResponse('rooms', $mergedRooms);
@@ -91,7 +91,6 @@ class RoomController extends Controller
     {
         $room = Room::find($id)->with('requests');
         return Api::setResponse('room', $room);
-
     }
 
 }

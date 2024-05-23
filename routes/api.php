@@ -48,11 +48,12 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::any('user/online', [AuthController::class, 'isOnline']);
     Route::get('followers/{userId}', [UserRelationshipController::class, 'followers']);
     Route::get('followees/{userId}', [UserRelationshipController::class, 'followees']);
+    Route::get('rooms/chat/all', [RoomController::class, 'getChatRooms']);
+    Route::get('rooms/queue/all', [RoomController::class, 'getQueueRooms']);
 });
 
 // CHAT ROOMS
-Route::get('rooms/chat/all', [RoomController::class, 'getChatRooms']);
-Route::get('rooms/queue/all', [RoomController::class, 'getQueueRooms']);
+
 // RECORDING
 Route::any('recording/store', [RecordingController::class, 'store']);
 // CHAT APIS //

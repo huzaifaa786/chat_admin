@@ -89,7 +89,7 @@ class RoomController extends Controller
 
     public function getRoomDetail($id)
     {
-        $room = Room::find($id)->with('requests');
+        $room = Room::where('room_id',$id)->with('requests')->first();
         return Api::setResponse('room', $room);
     }
 

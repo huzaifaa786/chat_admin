@@ -32,6 +32,7 @@ Route::any('verifyOtp', [AuthController::class, 'verifyOtp']);
 Route::any('forgetUpdatePassword', [AuthController::class, 'forgetupdatePassword']);
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
+    Route::any('queuerequest/all/delete', [SongQueueRequestController::class, 'deleteAllRequest']);
     Route::post('updatePassword', [AuthController::class, 'updatePassword']);
     Route::any('user/search', [AuthController::class, 'searchUser']);
     Route::get('user/details', [AuthController::class, 'userDetail']);

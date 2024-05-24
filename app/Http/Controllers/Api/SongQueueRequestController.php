@@ -6,6 +6,7 @@ use App\Helpers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\SongQueueRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SongQueueRequestController extends Controller
 {
@@ -25,5 +26,11 @@ class SongQueueRequestController extends Controller
             return Api::setMessage('Song Request Deleted Successfully');
         }
         return Api::setError('Song Request not found');
+    }
+
+    public function deleteAllRequest(Request $request)
+    {
+        SongQueueRequest::where('room_id', $request->room_id)->where('singer_id', Auth::id())->delete();
+        return Api::setMessage('Song Requests Deleted Successfully');
     }
 }

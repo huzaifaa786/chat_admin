@@ -42,12 +42,12 @@ class UserRelationshipController extends Controller
 
         if (!$existingRelationship) {
             // Create the relationship
-            $relationship = UserRelationship::create([ 
+            $relationship = UserRelationship::create([
                 'follower_id' => $followerId,
                 'followee_id' => $request->followee_id,
             ]);
 
-            (new NotificationService)->sendNotification($relationship->follower->id, $relationship->followee->id, $relationship->followee->fcm_token, null, "New follower", $relationship->follower->name . " started following you", "FOLLOW");
+            (new NotificationService)->sendNotification($relationship->follower->id, $relationship->followee->id, $relationship->follower->fcm_token, null, "New follower", $relationship->follower->name . " started following you", "FOLLOW");
         }
 
         $user = User::find($request->followee_id);

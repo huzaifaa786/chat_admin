@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::get('rooms/chat/all', [RoomController::class, 'getChatRooms']);
     Route::get('rooms/queue/all', [RoomController::class, 'getQueueRooms']);
     Route::get('rooms/detail/{id}', [RoomController::class, 'getRoomDetail']);
+    Route::post('user/updateProfile', [AuthController::class, 'updateProfile']);
 });
 
 // CHAT ROOMS

@@ -107,7 +107,7 @@ class AuthController extends Controller
     }
     public function allUser()
     {
-        $users = User::where('id','!=',Auth::user()->id)->get();
+        $users = User::where('id', '!=', Auth::user()->id)->get();
         return Api::setResponse('users', $users);
     }
 
@@ -180,7 +180,7 @@ class AuthController extends Controller
             $user->token = $user->createToken('auth_token')->plainTextToken;
             return Api::setResponse('user', $user);
         } else {
-            return Api::setResponse('user' , null);
+            return Api::setResponse('user', null);
         }
     }
     public function forgetupdatePassword(Request $request)
@@ -193,5 +193,12 @@ class AuthController extends Controller
         ]);
 
         return Api::setResponse('update', $data);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = User::find(Auth::id());
+        $user->update($request->all());
+        return Api::setResponse('user', $user);
     }
 }

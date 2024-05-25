@@ -203,11 +203,11 @@ class AuthController extends Controller
                 'name' => $request->name,
                 'image' => $request->image,
             ]);
-        else {
+        else
             $user->update([
                 'name' => $request->name,
             ]);
-        }
+
         return Api::setResponse('user', $user);
     }
 }

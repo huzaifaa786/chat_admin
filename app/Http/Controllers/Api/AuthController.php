@@ -198,7 +198,16 @@ class AuthController extends Controller
     public function updateProfile(Request $request)
     {
         $user = User::find(Auth::id());
-        $user->update($request->all());
+        if (isset($request->image))
+            $user->update([
+                'name' => $request->name,
+                'image' => $request->image,
+            ]);
+        else {
+            $user->update([
+                'name' => $request->name,
+            ]);
+        }
         return Api::setResponse('user', $user);
     }
 }

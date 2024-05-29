@@ -75,7 +75,7 @@ class RoomController extends Controller
         // Merge the two collections
         $mergedRooms = $rooms->merge($privateRooms);
 
-
+        return Api::setResponse('rooms', $mergedRooms);
     }
     public function getQueueRooms()
     {

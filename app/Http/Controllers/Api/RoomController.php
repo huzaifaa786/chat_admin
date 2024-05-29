@@ -75,7 +75,7 @@ class RoomController extends Controller
         // Merge the two collections
         $mergedRooms = $rooms->merge($privateRooms);
 
-        return Api::setResponse('rooms', $mergedRooms);
+
     }
     public function getQueueRooms()
     {
@@ -89,8 +89,14 @@ class RoomController extends Controller
 
     public function getRoomDetail($id)
     {
-        $room = Room::where('room_id',$id)->with('requests')->first();
+        $room = Room::where('room_id', $id)->with('requests')->first();
         return Api::setResponse('room', $room);
+    }
+
+    public function myRooms()
+    {
+        $rooms = Room::where('host_id', Auth::id())->where('room_status', RoomStatus::ACTIVE->value)->get();
+        return Api::setResponse('rooms', $rooms);
     }
 
 }

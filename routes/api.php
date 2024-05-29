@@ -33,6 +33,7 @@ Route::any('forgetUpdatePassword', [AuthController::class, 'forgetupdatePassword
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::any('queuerequest/all/delete', [SongQueueRequestController::class, 'deleteAllRequest']);
+
     Route::post('updatePassword', [AuthController::class, 'updatePassword']);
     Route::any('user/search', [AuthController::class, 'searchUser']);
     Route::get('user/details', [AuthController::class, 'userDetail']);
@@ -50,6 +51,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::get('followers/{userId}', [UserRelationshipController::class, 'followers']);
     Route::get('followees/{userId}', [UserRelationshipController::class, 'followees']);
     Route::get('rooms/chat/all', [RoomController::class, 'getChatRooms']);
+    Route::get('myrooms/all', [RoomController::class, 'myRooms']);
     Route::get('rooms/queue/all', [RoomController::class, 'getQueueRooms']);
     Route::get('rooms/detail/{id}', [RoomController::class, 'getRoomDetail']);
     Route::post('user/updateProfile', [AuthController::class, 'updateProfile']);

@@ -13,5 +13,6 @@ class SongQueueRequest extends Model
         'room_id',
         'song_id',
         'singer_id',
+        'partner_id',
     ];
 }

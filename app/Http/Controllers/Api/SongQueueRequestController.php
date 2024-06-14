@@ -17,7 +17,7 @@ class SongQueueRequestController extends Controller
     }
     public function update(Request $request)
     {
-        $songRequest = SongQueueRequest::where('room_id', $request->room_id)->where('song_id', $request->song_id)->where('singer_id', $request->singer_id)->first();
+        $songRequest = SongQueueRequest::where('room_id', $request->room_id)->where('song_id', $request->song_id)->where('singer_id', $request->singer_id)->orWhere('partner_id', $request->singer_id)->first();
         if ($songRequest) {
             $songRequest->update([
                 'partner_id' => null,

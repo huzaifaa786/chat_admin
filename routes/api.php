@@ -24,6 +24,7 @@ Route::any('duetrequest/create', [DuetRequestController::class, 'createDuetReque
 Route::any('duetrequest/pending', [DuetRequestController::class, 'pendingDuetRequest']);
 Route::any('duetrequest/status/update', [DuetRequestController::class, 'updateStatus']);
 Route::any('queuerequest/create', [SongQueueRequestController::class, 'store']);
+Route::any('queuerequest/update', [SongQueueRequestController::class, 'update']);
 Route::any('queuerequest/delete', [SongQueueRequestController::class, 'deleteRequest']);
 
 Route::any('forgetpassword', [AuthController::class, 'forgetPassword']);

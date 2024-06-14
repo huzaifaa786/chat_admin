@@ -15,6 +15,21 @@ class SongQueueRequestController extends Controller
         $songRequest = SongQueueRequest::create($request->all());
         return Api::setResponse('song_request', $songRequest);
     }
+    public function update(Request $request)
+    {
+        $songRequest = SongQueueRequest::where('room_id', $request->room_id)->where('song_id', $request->song_id)->where('singer_id', $request->singer_id)->first();
+        if ($songRequest) {
+            $songRequest->update([
+                'partner_id' => null,
+            ]);
+
+            $updatedSongRequest = SongQueueRequest::find($songRequest->id);
+            return Api::setResponse('song_request', $updatedSongRequest);
+        } else {
+            return Api::setError('Song request not found');
+        }
+
+    }
 
     public function deleteRequest(Request $request)
     {

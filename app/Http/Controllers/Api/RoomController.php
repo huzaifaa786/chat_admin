@@ -16,13 +16,23 @@ class RoomController extends Controller
     public function createRoom(Request $request)
     {
         try {
+            // Check if the host already has a room
+            $existingRoom = Room::where('host_id', $request->host_id)->first();
+
+            if ($existingRoom) {
+                return Api::setError('You already has an existing room.');
+            }
+
+            // If no existing room, create a new one
             $dbroom = Room::create($request->all());
             $room = Room::find($dbroom->id);
+
             return Api::setResponse('room', $room);
         } catch (\Throwable $th) {
             return Api::setError($th->getMessage());
         }
     }
+
 
     public function updateRoomCount(Request $request)
     {

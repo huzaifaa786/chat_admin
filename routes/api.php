@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DuetRequestController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\RecordingController;
+use App\Http\Controllers\Api\RoomManagerController;
 use App\Http\Controllers\Api\SongQueueRequestController;
 use App\Http\Controllers\Api\UserRelationshipController;
 use Illuminate\Http\Request;
@@ -34,7 +35,9 @@ Route::any('forgetUpdatePassword', [AuthController::class, 'forgetupdatePassword
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::any('queuerequest/all/delete', [SongQueueRequestController::class, 'deleteAllRequest']);
-
+    Route::post('add/manager',[RoomManagerController::class,"addManager"]);
+    Route::post('remove/manager',[RoomManagerController::class,"removeManager"]);
+    Route::post('manager/get',[RoomManagerController::class,"getManagers"]);
     Route::post('updatePassword', [AuthController::class, 'updatePassword']);
     Route::any('user/search', [AuthController::class, 'searchUser']);
     Route::get('user/details', [AuthController::class, 'userDetail']);

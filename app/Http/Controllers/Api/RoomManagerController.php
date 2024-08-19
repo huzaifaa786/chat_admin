@@ -11,10 +11,19 @@ class RoomManagerController extends Controller
 {
     public function addManager(Request $request)
     {
+        $existingRoomManager = RoomManager::where('room_id', $request->roomId)
+            ->where('manager_id', $request->managerId)
+            ->first();
+
+        if ($existingRoomManager) {
+            return Api::setResponse("roomManager", $existingRoomManager);
+        }
+
         $roomManager = RoomManager::create([
             'room_id' => $request->roomId,
             'manager_id' => $request->managerId,
         ]);
+
         return Api::setResponse("roomManager", $roomManager);
     }
     public function removeManager(Request $request)
@@ -30,6 +39,5 @@ class RoomManagerController extends Controller
     {
         $roomManagers = RoomManager::where('room_id', $request->roomId)->get();
         return Api::setResponse('roomManagers', $roomManagers);
-
     }
 }

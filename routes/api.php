@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\SongController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BlockedUserController;
 use App\Http\Controllers\Api\DuetRequestController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\RecordingController;
@@ -34,10 +35,17 @@ Route::any('verifyOtp', [AuthController::class, 'verifyOtp']);
 Route::any('forgetUpdatePassword', [AuthController::class, 'forgetupdatePassword']);
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
+    // Block unblock
+    Route::post('/block', [BlockedUserController::class, 'blockUser']);
+    Route::post('/unblock', [BlockedUserController::class, 'unblockUser']);
+    Route::get('/blocked-users', [BlockedUserController::class, 'blockedUsers']);
+    Route::post('/check-block-app', [BlockedUserController::class, 'checkBlockAppWide']);
+    Route::post('/check-block-room', [BlockedUserController::class, 'checkBlockInRoom']);
+    // Block unblock
     Route::any('queuerequest/all/delete', [SongQueueRequestController::class, 'deleteAllRequest']);
-    Route::post('add/manager',[RoomManagerController::class,"addManager"]);
-    Route::post('remove/manager',[RoomManagerController::class,"removeManager"]);
-    Route::post('manager/get',[RoomManagerController::class,"getManagers"]);
+    Route::post('add/manager', [RoomManagerController::class, "addManager"]);
+    Route::post('remove/manager', [RoomManagerController::class, "removeManager"]);
+    Route::post('manager/get', [RoomManagerController::class, "getManagers"]);
     Route::post('updatePassword', [AuthController::class, 'updatePassword']);
     Route::any('user/search', [AuthController::class, 'searchUser']);
     Route::get('user/details', [AuthController::class, 'userDetail']);

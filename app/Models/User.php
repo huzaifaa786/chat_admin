@@ -50,7 +50,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected $appends = ['is_following', 'is_blocked'];
+    protected $appends = ['is_following', 'is_blocked','blocked_by_me'];
 
     public function setPasswordAttribute($value)
     {
@@ -74,6 +74,18 @@ class User extends Authenticatable
         if (Auth::check()) {
             return BlockedUser::where('blocker_id', Auth::id())
                 ->where('blocked_user_id', $this->id)
+                ->where('block_type', 'app')
+                ->where('is_unblocked', false)
+                ->exists();
+        }
+        return false;
+    }
+
+    public function getBlockedByMeAttribute(): bool
+    {
+        if (Auth::check()) {
+            return BlockedUser::where('blocker_id', $this->id)
+                ->where('blocked_user_id', Auth::id())
                 ->where('block_type', 'app')
                 ->where('is_unblocked', false)
                 ->exists();

@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Api;
 use App\Http\Controllers\Controller;
+use App\Models\UserRelationship;
 use Illuminate\Http\Request;
 use App\Models\BlockedUser;
 use App\Models\User;
@@ -54,6 +55,15 @@ class BlockedUserController extends Controller
             'block_end_date' => $block_end_date,
             'block_type' => $block_type,
         ]);
+        
+        // Remove the blocked user from the follow and following lists
+        UserRelationship::where('follower_id', $blocker_id)
+            ->where('followee_id', $blocked_user_id)
+            ->delete(); // Remove from following list
+
+        UserRelationship::where('follower_id', $blocked_user_id)
+            ->where('followee_id', $blocker_id)
+            ->delete(); // Remove from followers list
         $user = User::find($blocked_user_id);
         return Api::setResponse('user', $user);
 

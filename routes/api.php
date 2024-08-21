@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::post('/block', [BlockedUserController::class, 'blockUser']);
     Route::post('/unblock', [BlockedUserController::class, 'unblockUser']);
     Route::get('/blocked-users', [BlockedUserController::class, 'blockedUsers']);
+    Route::get('/blocked-room-users', [BlockedUserController::class, 'blockedRoomUsers']);
     Route::post('/check-block-app', [BlockedUserController::class, 'checkBlockAppWide']);
     Route::post('/check-block-room', [BlockedUserController::class, 'checkBlockInRoom']);
     // Block unblock

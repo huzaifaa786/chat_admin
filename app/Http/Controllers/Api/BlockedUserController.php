@@ -55,7 +55,7 @@ class BlockedUserController extends Controller
             'block_end_date' => $block_end_date,
             'block_type' => $block_type,
         ]);
-        
+
         // Remove the blocked user from the follow and following lists
         UserRelationship::where('follower_id', $blocker_id)
             ->where('followee_id', $blocked_user_id)
@@ -112,7 +112,20 @@ class BlockedUserController extends Controller
         $blocker_id = Auth::id();
 
         $blockedUsers = BlockedUser::where('blocker_id', $blocker_id)
-            ->where('is_unblocked', false)
+            ->where('is_unblocked', false)->where('block_type', 'app')
+            ->with(['blockedUser', 'blockedRoom'])
+            ->get();
+
+        return Api::setResponse('blocked', $blockedUsers);
+
+
+    }
+    public function blockedRoomUsers(Request $request)
+    {
+        $blocker_id = Auth::id();
+
+        $blockedUsers = BlockedUser::where('blocker_id', $blocker_id)
+            ->where('is_unblocked', false)->where('block_type', 'room')
             ->with(['blockedUser', 'blockedRoom'])
             ->get();
 

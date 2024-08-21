@@ -31,7 +31,7 @@ class Room extends Model
     {
         if (Auth::check()) {
             return BlockedUser::where('blocked_user_id', Auth::id())
-                ->where('blocked_room_id', $this->id)
+                ->where('blocked_room_id', $this->room_id)
                 ->where('block_type', 'room')
                 ->where('is_unblocked', false)
                 ->exists();

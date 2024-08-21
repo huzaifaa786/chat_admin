@@ -8,6 +8,7 @@ use App\Helpers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BlockedUser;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -38,8 +39,10 @@ class BlockedUserController extends Controller
             ->where('is_unblocked', false)
             ->first();
 
+
         if ($existingBlock) {
-            return Api::setResponse('blocked', $existingBlock);
+            $user = User::find($blocked_user_id);
+            return Api::setResponse('user', $user);
         }
 
         // Create the block
@@ -51,8 +54,8 @@ class BlockedUserController extends Controller
             'block_end_date' => $block_end_date,
             'block_type' => $block_type,
         ]);
-
-        return Api::setResponse('blocked', $existingBlock);
+        $user = User::find($blocked_user_id);
+        return Api::setResponse('user', $user);
 
     }
 
@@ -77,7 +80,8 @@ class BlockedUserController extends Controller
             ->first();
 
         if (!$blockedUser) {
-            return Api::setResponse('unblocked', $blockedUser);
+            $user = User::find($blocked_user_id);
+            return Api::setResponse('user', $user);
 
         }
 
@@ -85,7 +89,8 @@ class BlockedUserController extends Controller
             'is_unblocked' => true,
         ]);
 
-        return Api::setResponse('unblocked', $blockedUser);
+        $user = User::find($blocked_user_id);
+        return Api::setResponse('user', $user);
 
     }
 

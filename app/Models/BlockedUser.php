@@ -36,11 +36,11 @@ class BlockedUser extends Model
         return $this->belongsTo(User::class, 'blocked_user_id');
     }
 
-    /**
-     * Get the room where the user is blocked.
-     */
-    public function blockedRoom()
-    {
-        return $this->belongsTo(Room::class, 'blocked_room_id');
-    }
+    // /**
+    //  * Get the room where the user is blocked.
+    //  */
+    // public function blockedRoom()
+    // {
+    //     return $this->belongsTo(Room::class, 'blocked_room_id','room_id');
+    // }
 }

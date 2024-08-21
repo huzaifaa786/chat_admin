@@ -22,7 +22,7 @@ class BlockedUserController extends Controller
     {
         $request->validate([
             'blocked_user_id' => 'required|exists:users,id',
-            'blocked_room_id' => 'nullable|exists:rooms,id',
+            'blocked_room_id' => 'nullable|exists:rooms,room_id',
             'block_duration' => 'nullable|integer|in:1,3,6,12', // Months
         ]);
 
@@ -110,28 +110,22 @@ class BlockedUserController extends Controller
     public function blockedUsers(Request $request)
     {
         $blocker_id = Auth::id();
-
         $blockedUsers = BlockedUser::where('blocker_id', $blocker_id)
             ->where('is_unblocked', false)->where('block_type', 'app')
             ->with(['blockedUser', 'blockedRoom'])
             ->get();
 
         return Api::setResponse('blocked', $blockedUsers);
-
-
     }
     public function blockedRoomUsers(Request $request)
     {
         $blocker_id = Auth::id();
-
         $blockedUsers = BlockedUser::where('blocker_id', $blocker_id)
             ->where('is_unblocked', false)->where('block_type', 'room')
             ->with(['blockedUser', 'blockedRoom'])
             ->get();
 
         return Api::setResponse('blocked', $blockedUsers);
-
-
     }
 
     /**

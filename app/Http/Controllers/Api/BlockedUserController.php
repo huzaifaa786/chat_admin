@@ -111,9 +111,7 @@ class BlockedUserController extends Controller
     {
         $blocker_id = Auth::id();
         $blockedUsers = BlockedUser::where('blocker_id', $blocker_id)
-            ->where('is_unblocked', false)->where('block_type', 'app')
-
-            ->get();
+            ->where('is_unblocked', false)->where('block_type', 'app')->get();
 
         return Api::setResponse('blocked', $blockedUsers);
     }
@@ -121,9 +119,7 @@ class BlockedUserController extends Controller
     {
         $blocker_id = Auth::id();
         $blockedUsers = BlockedUser::where('blocker_id', $blocker_id)
-            ->where('is_unblocked', false)->where('block_type', 'room')
-      
-            ->get();
+            ->where('is_unblocked', false)->where('block_type', 'room')->get();
 
         return Api::setResponse('blocked', $blockedUsers);
     }

@@ -35,7 +35,7 @@ class BlockedUser extends Model
      */
     public function blockedUser()
     {
-        return $this->hasOne(User::class, 'blocked_user_id','id');
+        return $this->belongsTo(User::class, 'blocked_user_id','id');
     }
 
     // /**

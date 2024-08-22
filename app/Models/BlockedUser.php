@@ -20,6 +20,8 @@ class BlockedUser extends Model
         'is_unblocked',
     ];
 
+    protected $with = ['blockedUser'];
+
     /**
      * Get the user who blocked another user.
      */

@@ -76,7 +76,7 @@ class BlockedUserController extends Controller
     {
         $request->validate([
             'blocked_user_id' => 'required|exists:users,id',
-            'blocked_room_id' => 'nullable|exists:rooms,id',
+            'blocked_room_id' => 'nullable|exists:rooms,room_id',
         ]);
 
         $blocker_id = Auth::id();

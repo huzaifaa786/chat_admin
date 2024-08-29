@@ -48,6 +48,18 @@ class AuthController extends Controller
             return Api::setError("User not found");
         }
     }
+    public function userInfo(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+
+        if ($user) {
+            $user->followees;
+            $user->followers;
+            return Api::setResponse("user", $user);
+        } else {
+            return Api::setError("User not found");
+        }
+    }
 
     public function getUser(Request $request)
     {

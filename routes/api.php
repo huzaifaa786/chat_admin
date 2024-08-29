@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::post('updatePassword', [AuthController::class, 'updatePassword']);
     Route::any('user/search', [AuthController::class, 'searchUser']);
     Route::get('user/details', [AuthController::class, 'userDetail']);
+    Route::post('user/info', [AuthController::class, 'userInfo']);
     Route::get('notification/all', [NotificationController::class, 'getNotification']);
     Route::any('user/get', [AuthController::class, 'getUser']);
     Route::get('user/all', [AuthController::class, 'allUser']);

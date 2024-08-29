@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\Room\RoomStatus;
+use App\Enums\Room\RoomVisibility;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\Api;
@@ -9,6 +11,8 @@ use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Mail\UserForgetPassword;
 use App\Models\ForgetPassword;
+use App\Models\Recording;
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -59,6 +63,16 @@ class AuthController extends Controller
         } else {
             return Api::setError("User not found");
         }
+    }
+    public function userDrafts(Request $request)
+    {
+        $recordings = Recording::where('user_id', $request->user_id)->with('room')->with('song')->with('user')->get();
+        return Api::setResponse('recordings', $recordings);
+    }
+    public function userRooms(Request $request)
+    {
+        $rooms = Room::where('host_id', $request->user_id)->where('room_visibility', RoomVisibility::PUBLIC ->value)->where('room_status', RoomStatus::ACTIVE->value)->with('requests')->get();
+        return Api::setResponse('rooms', $rooms);
     }
 
     public function getUser(Request $request)

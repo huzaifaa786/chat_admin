@@ -51,6 +51,8 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::any('user/search', [AuthController::class, 'searchUser']);
     Route::get('user/details', [AuthController::class, 'userDetail']);
     Route::post('user/info', [AuthController::class, 'userInfo']);
+    Route::post('user/drafts', [AuthController::class, 'userDrafts']);
+    Route::post('user/rooms', [AuthController::class, 'userRooms']);
     Route::get('notification/all', [NotificationController::class, 'getNotification']);
     Route::any('user/get', [AuthController::class, 'getUser']);
     Route::get('user/all', [AuthController::class, 'allUser']);

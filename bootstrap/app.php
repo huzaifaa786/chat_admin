@@ -26,12 +26,13 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Throwable $e, Request $request) {
-            if ($request->is('api/*')) {
-                return Api::setError($e->getMessage());
-            }else{
-                $retval = parent::render($request, $e);
-            }
-            return $retval;
+            dd($e,$request);
+            // if ($request->is('api/*')) {
+            //     return Api::setError($e->getMessage());
+            // }else{
+            //     $retval = parent::render($request, $e);
+            // }
+            // return $retval;
 
         });
     })->create();

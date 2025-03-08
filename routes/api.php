@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\SongController;
 use App\Http\Controllers\Api\AuthController;
@@ -71,6 +72,11 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::get('rooms/queue/all', [RoomController::class, 'getQueueRooms']);
     Route::get('rooms/detail/{id}', [RoomController::class, 'getRoomDetail']);
     Route::post('user/updateProfile', [AuthController::class, 'updateProfile']);
+
+    // *************** Products Routes Starts *****************
+    Route::get('products', [ProductController::class, 'index']);
+    Route::post('products/store', [ProductController::class, 'store']);
+    // ***************** Products Routes Ends *****************
 });
 
 // CHAT ROOMS
@@ -149,6 +155,8 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
          * Set active status
          */
         Route::post('/setActiveStatus', 'MessagesController@setActiveStatus')->name('api.activeStatus.set');
+
+
     });
 });
 

@@ -38,6 +38,6 @@ class Product extends Model
 
     public function getIsNewAttribute(): bool
     {
-        return $this->created_at->gt(Carbon::now()->subDays(10));
+        return $this->created_at->gt(Carbon::now()->subMinutes(5));
     }
 }

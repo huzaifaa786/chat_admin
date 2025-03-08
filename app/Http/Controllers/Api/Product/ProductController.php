@@ -18,7 +18,9 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->all());
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
+        $product = Product::create($data);
         return Api::setResponse('product', $product);
     }
 

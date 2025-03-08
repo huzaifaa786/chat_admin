@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\ImageHelper;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,7 @@ class Product extends Model
     ];
 
     protected $with = ['user'];
+    protected $appends = ['is_new'];
 
     public function user()
     {
@@ -32,5 +34,10 @@ class Product extends Model
             get: fn(string $value) => asset($value),
             set: fn(string $value) => ImageHelper::saveImageFromApi($value, 'images/products')
         );
+    }
+
+    public function getIsNewAttribute(): bool
+    {
+        return $this->created_at->gt(Carbon::now()->subDays(10));
     }
 }

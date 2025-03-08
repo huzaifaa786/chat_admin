@@ -5,7 +5,7 @@ use App\Http\Middleware\UserMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -26,13 +26,13 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Throwable $e, Request $request) {
-            dd($e,$request);
-            // if ($request->is('api/*')) {
-            //     return Api::setError($e->getMessage());
-            // }else{
-            //     $retval = parent::render($request, $e);
-            // }
-            // return $retval;
+
+            if ($request->is('api/*')) {
+                return Api::setError($e->getMessage());
+            }else{
+                $retval = parent::render($request, $e);
+            }
+            return $retval;
 
         });
     })->create();

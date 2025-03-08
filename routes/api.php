@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     // *************** Products Routes Starts *****************
     Route::get('products', [ProductController::class, 'index']);
     Route::post('product/store', [ProductController::class, 'store']);
+    Route::get('product/delete/{id}', [ProductController::class, 'destroy']);
     // ***************** Products Routes Ends *****************
 });
 

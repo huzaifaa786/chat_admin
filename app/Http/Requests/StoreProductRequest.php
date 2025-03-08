@@ -29,4 +29,19 @@ class StoreProductRequest extends FormRequest
             'user_id' => 'required',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Name is required',
+            'price.required' => 'Price is required',
+            'image.required' => 'Image is required',
+            'user_id.required' => 'User is required',
+        ];
+    }
 }
